@@ -1,4 +1,71 @@
 @import "tailwindcss";
 @import "flowbite/src/themes/default";
 @plugin "flowbite/plugin";
-@source "../node_modules/flowbite";
+@source "../node_modules/flowbite/";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* global theme */
+
+@font-face {
+  font-family: Satoshi;
+  src: url("/fonts/Satoshi-Variable.ttf");
+}
+* {
+  font-family: Satoshi;
+}
+button {
+  cursor: pointer;
+}
+
+/* custom colors for tailwind */
+
+@theme {
+  --color-Nova: #edcf5d;
+  --color-lightGray: #f2f0ea;
+  --color-darkMode: #010101;
+  --color-darkMode2: #1e201e;
+}
+
+/* custom utilities for tailwind */
+@layer utilities {
+  .nova-Btn {
+    @apply p-2 rounded-md bg-Nova;
+  }
+  .flexed {
+    @apply flex justify-center items-center;
+  }
+}
+
+/* selection */
+
+::selection {
+  background: #edcf5d;
+  color: white;
+}
+:root.dark ::selection {
+  background: #edcf5d;
+  color: black;
+}
+
+/* scroll bar */
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 5px;
+  background: #f2f0ea;
+}
+:root.dark ::-webkit-scrollbar-track {
+  background-color: #1e201e;
+}
+::-webkit-scrollbar-thumb {
+  background: #edcf5d;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #edcf5d;
+}
+
+::-webkit-scrollbar-track {
+  background: #f2f0ea;
+}
