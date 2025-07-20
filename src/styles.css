@@ -14,7 +14,7 @@
 * {
   font-family: Satoshi;
 }
-button {
+button:not([class*="cursor-"]) {
   cursor: pointer;
 }
 
@@ -34,6 +34,15 @@ button {
   }
   .flexed {
     @apply flex justify-center items-center;
+  }
+
+  .myContainer {
+    min-height: calc(100vh - var(--spacing) * 20);
+    width: 100% !important;
+  }
+  :root.dark .myContainer {
+    background-color: #010101;
+    color: white;
   }
 }
 
