@@ -1,5 +1,5 @@
 <nav
-  class="bg-white border-gray-200 dark:bg-darkMode2 fixed left-0 right-0 h-20 z-50 shadow-md"
+  class="bg-white text-black border-gray-200 dark:bg-darkMode2 fixed left-0 right-0 h-20 z-50 shadow-md"
 >
   <div
     class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4"
@@ -11,7 +11,7 @@
       <!-- Nove hover not working in dark mode?????????????????????? -->
       <img src="/Nova logo.png" class="w-10" alt="" />
       <span
-        class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+        class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white transition"
         >Nova</span
       >
     </a>
@@ -26,7 +26,7 @@
       >
         <li>
           <a
-            class="dark:text-white flexed w-full rounded-md hover:bg-Nova p-2 md:bg-transparent md:hover:text-Nova md:hover:bg-transparent"
+            class="transition dark:text-white flexed w-full rounded-md hover:bg-Nova p-2 md:bg-transparent md:hover:text-Nova md:hover:bg-transparent"
             routerLink="/home"
             routerLinkActive="bg-Nova w-full md:text-Nova dark:md:text-Nova"
           >
@@ -35,7 +35,7 @@
         </li>
         <li>
           <a
-            class="dark:text-white flexed w-full rounded-md hover:bg-Nova p-2 md:bg-transparent md:hover:text-Nova md:hover:bg-transparent"
+            class="dark:text-white transition flexed w-full rounded-md hover:bg-Nova p-2 md:bg-transparent md:hover:text-Nova md:hover:bg-transparent transition"
             routerLink="/cart"
             routerLinkActive="bg-Nova w-full md:text-Nova dark:md:text-Nova"
           >
@@ -44,7 +44,7 @@
         </li>
         <li>
           <a
-            class="dark:text-white flexed w-full rounded-md hover:bg-Nova p-2 md:bg-transparent md:hover:text-Nova md:hover:bg-transparent"
+            class="dark:text-white flexed w-full rounded-md hover:bg-Nova p-2 md:bg-transparent md:hover:text-Nova md:hover:bg-transparent transition"
             routerLink="/products"
             routerLinkActive="bg-Nova w-full md:text-Nova dark:md:text-Nova"
           >
@@ -53,7 +53,7 @@
         </li>
         <li>
           <a
-            class="dark:text-white flexed w-full rounded-md hover:bg-Nova p-2 md:bg-transparent md:hover:text-Nova md:hover:bg-transparent"
+            class="dark:text-white flexed w-full rounded-md hover:bg-Nova p-2 md:bg-transparent md:hover:text-Nova md:hover:bg-transparent transition"
             routerLink="/categories"
             routerLinkActive="bg-Nova w-full md:text-Nova dark:md:text-Nova"
           >
@@ -62,7 +62,7 @@
         </li>
         <li>
           <a
-            class="dark:text-white flexed w-full rounded-md hover:bg-Nova p-2 md:bg-transparent md:hover:text-Nova md:hover:bg-transparent"
+            class="dark:text-white flexed w-full rounded-md hover:bg-Nova p-2 md:bg-transparent md:hover:text-Nova md:hover:bg-transparent transition"
             routerLink="/brands"
             routerLinkActive="bg-Nova w-full md:text-Nova dark:md:text-Nova"
           >
@@ -75,14 +75,17 @@
 
     <div class="flexed gap-3 order-2 md:order-3">
       @if (isLogged()) {
-      <a class="p-2 hover:text-Nova dark:text-white" routerLink="/login">
+      <a
+        class="p-2 hover:text-Nova dark:text-white transition"
+        routerLink="/login"
+      >
         Sign out
       </a>
       }
 
       <button
         (click)="toggleDarkMode()"
-        class="hover:bg-lightGray w-8 h-8 rounded-md dark:hover:bg-darkMode"
+        class="hover:bg-lightGray w-8 h-8 rounded-md dark:hover:bg-darkMode transition"
       >
         <i
           class="fa-solid fa-moon cursor-pointer text-black dark:text-Nova"
