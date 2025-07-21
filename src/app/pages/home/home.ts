@@ -1,11 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { initFlowbite } from 'flowbite';
+import { Flowbite } from '../../core/services/flowbite/flowbite';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrl: './home.css',
 })
-export class Home {
+export class Home implements OnInit {
+  private readonly flowbite = inject(Flowbite);
 
+  ngOnInit(): void {
+    this.flowbite.loadFlowbite((flowbite) => {
+      initFlowbite();
+    });
+  }
 }

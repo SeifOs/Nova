@@ -30,7 +30,10 @@ button:not([class*="cursor-"]) {
 /* custom utilities for tailwind */
 @layer utilities {
   .nova-Btn {
-    @apply p-2 rounded-md bg-Nova;
+    @apply p-2 rounded-md bg-Nova border-2 border-Nova hover:bg-transparent dark:text-black dark:hover:text-Nova transition;
+  }
+  .nova-Btn2 {
+    @apply p-2 rounded-md border-2 border-Nova hover:bg-Nova hover:text-black dark:text-Nova transition;
   }
   .flexed {
     @apply flex justify-center items-center;
