@@ -1,1 +1,60 @@
-<p>products works!</p>
+<section class="myContainer bg-white dark:bg-darkMode2 py-10">
+  <h2 class="text-4xl font-bold text-center">Products</h2>
+  <div
+    class="w-full px-20 flex justify-evenly flex-wrap gap-4 py-10 dark:bg-darkMode2"
+  >
+    @for (product of products; track product._id) {
+    <div
+      class="hover:scale-105 transition cursor-pointer bg-white dark:bg-darkMode shadow-md w-[200px] p-3 flex flex-col justify-between rounded-md"
+      (click)="goToProduct(product._id)"
+    >
+      <img
+        [src]="product.imageCover"
+        [alt]="product.title"
+        class="h-52 rounded-md"
+      />
+      <div class="text-start w-full">
+        <h3 class="font-semibold text-lg">
+          {{ product.title.split(" ").slice(0, 2).join(" ") }}
+        </h3>
+        <div class="text-sm bg-Nova/40 rounded-md w-fit p-1">
+          <i class="fa-solid fa-star text-sm text-Nova"></i>
+          {{ product.ratingsAverage }}
+        </div>
+      </div>
+      <div class="w-full flex justify-between items-center pt-5">
+        <h3 class="font-semibold">{{ product.price }} EGP</h3>
+        <div class="flex gap-1">
+          <button
+            (click)="addToWishList($event)"
+            class="w-8 h-8 flexed border rounded-md hover:bg-red-600 hover:border-red-600 hover:text-white"
+          >
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <button
+            (click)="addToCart($event)"
+            class="w-8 h-8 flexed bg-Nova border border-Nova rounded-md hover:bg-transparent hover:text-Nova dark:text-black"
+          >
+            <i class="fa-solid fa-cart-shopping"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  <div class="flexed gap-5">
+    <button
+      (click)="goPrevPage()"
+      class="text-sm border-2 rounded-md py-1 px-2 border-Nova text-Nova hover:bg-Nova hover:text-white dark:hover:text-darkMode transition"
+    >
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    <p class="dark:text-Nova">{{ currentPage }}</p>
+    <button
+      (click)="goNextPage()"
+      class="text-sm border-2 rounded-md py-1 px-2 border-Nova text-Nova hover:bg-Nova hover:text-white dark:hover:text-darkMode transition"
+    >
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </div>
+</section>

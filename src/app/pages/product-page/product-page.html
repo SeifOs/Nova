@@ -1,0 +1,70 @@
+<section class="myContainer bg-white dark:bg-darkMode2 flexed">
+  <div
+    class="w-[90%] p-10 m-2 gap-5 rounded-md bg-lightGray dark:bg-darkMode2 flex flex-wrap lg:flex-nowrap justify-between"
+  >
+    <!-- img carousel -->
+    <div class="lg:w-[70%] h-full">
+      @if (loading) {
+      <div class="flex justify-center items-center h-[40vh]">
+        <p>Loading images...</p>
+      </div>
+      } @else if (product.images && product.images.length > 0) {
+      <div (mouseenter)="pauseCarousel()" (mouseleave)="resumeCarousel()">
+        <p-carousel
+          #carousel
+          [value]="product.images"
+          [numVisible]="1"
+          [numScroll]="1"
+          [circular]="true"
+          [autoplayInterval]="3000"
+          [showIndicators]="true"
+          [showNavigators]="true"
+        >
+          <ng-template pTemplate="item" let-image>
+            <div class="flex justify-center items-center">
+              <img
+                [src]="image.url || image"
+                [alt]="image.alt || 'Product image'"
+                class="max-w-full max-h-96 object-contain rounded-md"
+                (error)="onImageError($event)"
+              />
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
+      } @else {
+      <div class="flex justify-center items-center h-96 text-gray-500">
+        <p>No images available</p>
+      </div>
+      }
+    </div>
+    <!-- product details -->
+    <div class="w-full flex flex-col justify-center gap-4">
+      <h3 class="font-bold text-2xl">{{ product.title }}</h3>
+      <p class="text-sm">" {{ product.description }} "</p>
+      <p class="text-lg">
+        category: <span class="font-semibold">{{ product.category.name }}</span>
+      </p>
+      <p class="text-lg">
+        brand: <span class="font-semibold">{{ product.brand.name }}</span>
+      </p>
+      <div class="text-sm bg-Nova/40 rounded-md w-fit p-1">
+        <i class="fa-solid fa-star text-sm text-Nova"></i>
+        {{ product.ratingsAverage }}
+      </div>
+      <p class="text-2xl">
+        Price: <span class="font-bold">{{ product.price }}</span> EGP
+      </p>
+      <div class="flex gap-2 lg:h-10">
+        <button class="nova-Btn flexed gap-1">
+          <i class="fa-solid fa-cart-shopping"></i> Add to cart
+        </button>
+        <button
+          class="flexed gap-1 border border-red-600 text-red-600 rounded-md px-2 hover:bg-red-600 hover:border-red-600 hover:text-white"
+        >
+          <i class="fa-regular fa-heart"></i> Add to wish list
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,11 @@
+:host ::ng-deep .p-carousel .p-carousel-indicator-button {
+  width: 10px;
+  height: 10px;
+}
+:host
+  ::ng-deep
+  .p-carousel
+  .p-carousel-indicator-active
+  .p-carousel-indicator-button {
+  background-color: #edcf5d !important;
+}

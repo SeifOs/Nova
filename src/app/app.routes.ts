@@ -9,6 +9,7 @@ import { Brands } from './pages/brands/brands';
 import { Cart } from './pages/cart/cart';
 import { Categories } from './pages/categories/categories';
 import { Products } from './pages/products/products';
+import { ProductPage } from './pages/product-page/product-page';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -29,6 +30,11 @@ export const routes: Routes = [
       { path: 'cart', component: Cart, title: 'Nove - cart' },
       { path: 'categories', component: Categories, title: 'Nove - categories' },
       { path: 'products', component: Products, title: 'Nove - products' },
+      {
+        path: 'product/:id',
+        component: ProductPage,
+        title: 'Nova - product page',
+      },
     ],
   },
   { path: '**', component: NotFound, title: 'Not found' },

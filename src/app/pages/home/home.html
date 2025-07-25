@@ -1,10 +1,13 @@
-<section class="myContainer">
+<section class="myContainer bg-lightGray dark:bg-darkMode2">
+  <!-- hello section -->
   <div
     class="lg:h-[60vh] py-5 bg-lightGray dark:bg-darkMode2 flex flex-col lg:flex-row justify-evenly items-center"
   >
     <!-- welcome msg -->
     <div class="lg:w-[30%] p-5 flex flex-col gap-5 items-center lg:items-start">
-      <h2 class="text-4xl lg:text-5xl font-extrabold">Hello, seif</h2>
+      <h2 class="text-4xl lg:text-5xl font-extrabold">
+        Hello, <span class="dark:text-Nova">seif</span>
+      </h2>
       <p class="text-lg lg:text-xl text-center lg:text-start">
         Let’s explore what’s new and trending.
       </p>
@@ -160,5 +163,82 @@
         </span>
       </button>
     </div>
+  </div>
+
+  <!-- category carsoule -->
+  <div class="py-10 bg-white dark:bg-darkMode">
+    <p-carousel
+      [value]="categories"
+      [numVisible]="7"
+      [numScroll]="1"
+      [circular]="true"
+      [responsiveOptions]="responsiveOptions"
+      autoplayInterval="3000"
+    >
+      <ng-template let-category #item>
+        <div
+          class="flexed hover:bg-lightGray dark:hover:bg-darkMode2 dark:hover:text-Nova cursor-pointer transition rounded-md"
+        >
+          <div class="p-2 flexed flex-col gap-2">
+            <img
+              [src]="category.image"
+              [alt]="category.name"
+              class="h-32 rounded-md"
+            />
+            <p class="font-semibold">{{ category.name }}</p>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+  <!-- products section -->
+  <h2 class="text-5xl text-center pt-10 dark:bg-darkMode2">For you</h2>
+  <div
+    class="w-full px-20 flex justify-evenly flex-wrap gap-4 py-10 dark:bg-darkMode2"
+  >
+    @for (product of products; track product._id) {
+    <div
+      class="hover:scale-105 transition cursor-pointer bg-white dark:bg-darkMode shadow-md w-[200px] p-3 flex flex-col justify-between rounded-md"
+      (click)="goToProduct(product._id)"
+    >
+      <img
+        [src]="product.imageCover"
+        [alt]="product.title"
+        class="h-52 rounded-md"
+      />
+      <div class="text-start w-full">
+        <h3 class="font-semibold text-lg">
+          {{ product.title.split(" ").slice(0, 2).join(" ") }}
+        </h3>
+        <div class="text-sm bg-Nova/40 rounded-md w-fit p-1">
+          <i class="fa-solid fa-star text-sm text-Nova"></i>
+          {{ product.ratingsAverage }}
+        </div>
+      </div>
+      <div class="w-full flex justify-between items-center pt-5">
+        <h3 class="font-semibold">{{ product.price }} EGP</h3>
+        <div class="flex gap-1">
+          <button
+            (click)="addToWishList($event, product._id)"
+            class="w-8 h-8 flexed border rounded-md hover:bg-red-600 hover:border-red-600 hover:text-white"
+          >
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <button
+            (click)="addToCart($event)"
+            class="w-8 h-8 flexed bg-Nova border border-Nova rounded-md hover:bg-transparent hover:text-Nova dark:text-black"
+          >
+            <i class="fa-solid fa-cart-shopping"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  <div class="flexed pb-10">
+    <button routerLink="/products" class="nova-Btn center">
+      see all products
+    </button>
   </div>
 </section>
