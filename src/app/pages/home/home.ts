@@ -1,3 +1,4 @@
+import { UserData } from './../../core/services/userData/user-data';
 import { Component, inject, OnInit } from '@angular/core';
 import { initFlowbite } from 'flowbite';
 import { Flowbite } from '../../core/services/flowbite/flowbite';
@@ -22,6 +23,7 @@ export class Home implements OnInit {
   private readonly getDataApi = inject(Getdata);
   private readonly router = inject(Router);
   private readonly toastrService = inject(ToastrService);
+  private readonly userData = inject(UserData);
 
   categories!: Category[];
   products!: Product[];
@@ -42,8 +44,11 @@ export class Home implements OnInit {
       numScroll: 1,
     },
   ];
+  userName: string = 'User';
 
   ngOnInit(): void {
+    this.userName = this.userData.getName();
+
     this.flowbite.loadFlowbite((flowbite) => {
       initFlowbite();
     });

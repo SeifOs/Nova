@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Auth } from '../../core/services/auth/auth';
 import { Router, RouterLink } from '@angular/router';
+import { UserData } from '../../core/services/userData/user-data';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ import { Router, RouterLink } from '@angular/router';
 export class Login {
   private readonly auth = inject(Auth);
   private readonly router = inject(Router);
+  private readonly userData = inject(UserData);
 
   isLoading: boolean = false;
   errMsg: string = '';
@@ -40,6 +42,9 @@ export class Login {
           this.isLoading = false;
           this.errMsg = '';
           this.sucessMsg = res.message;
+          this.userData.saveToken(res.token);
+          this.userData.saveName(res.user.name);
+          this.userData.saveEmail(res.user.email);
           setTimeout(() => {
             this.router.navigate(['/home']);
           }, 2000);

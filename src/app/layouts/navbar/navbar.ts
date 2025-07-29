@@ -1,7 +1,8 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { initFlowbite } from 'flowbite';
 import { Flowbite } from '../../core/services/flowbite/flowbite';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { UserData } from '../../core/services/userData/user-data';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   },
 })
 export class Navbar implements OnInit {
-  constructor(private flowbiteService: Flowbite) {}
+  private readonly flowbiteService = inject(Flowbite);
+  private readonly router = inject(Router);
+  private readonly userData = inject(UserData);
 
   isLogged = input<boolean>(false);
 
@@ -25,5 +28,14 @@ export class Navbar implements OnInit {
 
   toggleDarkMode() {
     document.documentElement.classList.toggle('dark');
+  }
+
+  signOut() {
+    this.userData.saveName('');
+    this.userData.saveToken('');
+    this.userData.saveEmail('');
+
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }

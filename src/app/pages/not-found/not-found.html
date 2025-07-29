@@ -1,1 +1,45 @@
-<p>not-found works!</p>
+<div
+  class="bg-white text-black border-gray-200 dark:bg-darkMode2 fixed left-0 right-0 h-20 z-50 shadow-md flex justify-between items-center px-10"
+>
+  <a
+    routerLink="/home"
+    class="flex items-center space-x-3 rtl:space-x-reverse text-black dark:text-white hover:text-Nova"
+  >
+    <!-- Nove hover not working in dark mode?????????????????????? -->
+    <img src="/Nova logo.png" class="w-10" alt="" />
+    <span
+      class="self-center text-2xl font-semibold whitespace-nowrap transition"
+      >Nova</span
+    >
+  </a>
+  <button
+    (click)="toggleDarkMode()"
+    class="hover:bg-lightGray w-8 h-8 rounded-md dark:hover:bg-darkMode transition"
+  >
+    <i class="fa-solid fa-moon cursor-pointer text-black dark:text-Nova"></i>
+  </button>
+</div>
+
+<section
+  class="h-[100vh] bg-lightGray dark:text-white text-black dark:bg-darkMode2 flexed"
+>
+  <div class="w-[40%] flex flex-col gap-5 text-center lg:text-start">
+    <div>
+      <h2 class="text-3xl lg:text-6xl font-semibold text-Nova">404</h2>
+      <h3 class="text-2xl lg:text-4xl font-semibold">This star went dark…</h3>
+    </div>
+    <p>
+      The page you're looking for can't be found. It might have drifted into the
+      void.
+    </p>
+    <a
+      routerLink="/home"
+      class="font-bold hover:text-Nova transition self-start flexed gap-3"
+    >
+      go back home <span class="fa-solid fa-arrow-right"></span
+    ></a>
+  </div>
+  <div class="w-[40%] hidden lg:block">
+    <img src="/notFound.png" alt="" class="w-full" />
+  </div>
+</section>

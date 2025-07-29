@@ -6,7 +6,7 @@
     <!-- welcome msg -->
     <div class="lg:w-[30%] p-5 flex flex-col gap-5 items-center lg:items-start">
       <h2 class="text-4xl lg:text-5xl font-extrabold">
-        Hello, <span class="dark:text-Nova">seif</span>
+        Hello, <span class="dark:text-Nova"> {{ userName }} </span>
       </h2>
       <p class="text-lg lg:text-xl text-center lg:text-start">
         Let’s explore what’s new and trending.
@@ -236,7 +236,7 @@
     </div>
     }
   </div>
-  <div class="flexed pb-10">
+  <div class="flexed pb-10 dark:bg-darkMode2">
     <button routerLink="/products" class="nova-Btn center">
       see all products
     </button>
