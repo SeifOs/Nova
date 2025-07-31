@@ -43,8 +43,6 @@ export class Login {
           this.errMsg = '';
           this.sucessMsg = res.message;
           this.userData.saveToken(res.token);
-          this.userData.saveName(res.user.name);
-          this.userData.saveEmail(res.user.email);
           setTimeout(() => {
             this.router.navigate(['/home']);
           }, 2000);

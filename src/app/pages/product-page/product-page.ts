@@ -1,3 +1,4 @@
+import { CartApi } from './../../core/services/cartApi/cart-api';
 import { Product } from './../../core/interfaces/product/product';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -15,6 +16,7 @@ import { Carousel } from 'primeng/carousel';
 export class ProductPage implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly getApiData = inject(Getdata);
+  private readonly cartApi = inject(CartApi);
 
   @ViewChild('carousel') carousel!: Carousel;
   loading = true;
@@ -58,5 +60,13 @@ export class ProductPage implements OnInit {
   onProductDataLoaded(productData: any) {
     this.product = productData;
     this.loading = false;
+  }
+
+  addToCart() {
+    this.cartApi.addToCart(this.product._id).subscribe({
+      next: (res) => {
+        console.log('added to the cart');
+      },
+    });
   }
 }

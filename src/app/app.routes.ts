@@ -11,19 +11,10 @@ import { Categories } from './pages/categories/categories';
 import { Products } from './pages/products/products';
 import { ProductPage } from './pages/product-page/product-page';
 import { authGuard } from './core/guards/auth/auth-guard';
-import { loggedGuard } from './core/guards/logged/logged-guard';
+import { signOutGuard } from './core/guards/signOut/sign-out-guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  {
-    path: '',
-    component: Auth,
-    canActivate: [loggedGuard],
-    children: [
-      { path: 'login', component: Login, title: 'Nova - login' },
-      { path: 'signup', component: Signup, title: 'Nova - signup' },
-    ],
-  },
   {
     path: '',
     component: Blank,
@@ -39,6 +30,15 @@ export const routes: Routes = [
         component: ProductPage,
         title: 'Nova - product page',
       },
+    ],
+  },
+  {
+    path: '',
+    component: Auth,
+    canActivate: [signOutGuard],
+    children: [
+      { path: 'login', component: Login, title: 'Nova - login' },
+      { path: 'signup', component: Signup, title: 'Nova - signup' },
     ],
   },
   { path: '**', component: NotFound, title: 'Not found' },

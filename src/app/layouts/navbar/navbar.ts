@@ -31,11 +31,7 @@ export class Navbar implements OnInit {
   }
 
   signOut() {
-    this.userData.saveName('');
-    this.userData.saveToken('');
-    this.userData.saveEmail('');
-
-    localStorage.removeItem('token');
+    this.userData.deleteToken();
     this.router.navigate(['/login']);
   }
 }

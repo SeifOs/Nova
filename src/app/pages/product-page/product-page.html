@@ -56,7 +56,7 @@
         Price: <span class="font-bold">{{ product.price }}</span> EGP
       </p>
       <div class="flex gap-2 lg:h-10">
-        <button class="nova-Btn flexed gap-1">
+        <button (click)="addToCart()" class="nova-Btn flexed gap-1">
           <i class="fa-solid fa-cart-shopping"></i> Add to cart
         </button>
         <button

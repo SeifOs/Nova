@@ -20,10 +20,4 @@ export class Getdata {
   getSpecificProduct(id: string): Observable<any> {
     return this.httpClient.get(`${environment.baseUrl}/api/v1/products/${id}`);
   }
-
-  addToWishList(id: string): Observable<any> {
-    return this.httpClient.post(`${environment.baseUrl}/api/v1/wishlist`, {
-      productId: id,
-    });
-  }
 }

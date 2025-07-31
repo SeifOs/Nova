@@ -1,1 +1,75 @@
-<p>cart works!</p>
+<section class="myContainer bg-lightGray dark:bg-darkMode2 flexed">
+  <div class="bg-white dark:bg-darkMode2 p-5 rounded-lg w-[80%] my-10">
+    <!-- head -->
+    <div class="flex justify-between items-center">
+      <div class="flex flex-col gap-2">
+        <h2 class="text-3xl lg:text-5xl">Cart</h2>
+        <p class="ps-1">
+          total:
+          <span class="dark:text-Nova font-bold"> {{ totalCartPrice }} </span>
+          L.E
+        </p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <button class="nova-Btn">Check out</button>
+        <p>
+          items num:
+          <span class="dark:text-Nova font-bold"> {{ numOfCartItems }} </span>
+        </p>
+      </div>
+    </div>
+
+    <!-- products -->
+
+    <div class="w-full flex flex-col gap-2 p-2">
+      @for (product of products; track product.product._id) {
+      <div
+        (click)="goToProduct(product.product._id)"
+        class="cursor-pointer w-full p-3 rounded-md hover:bg-lightGray dark:hover:bg-darkMode flex justify-between items-center"
+      >
+        <div class="flex gap-5">
+          <img
+            [src]="product.product.imageCover"
+            [alt]="product.product.title"
+            class="w-14 rounded-md"
+          />
+          <div>
+            <h3 class="font-semibold">{{ product.product.title }}</h3>
+            <p>price: {{ product.price }}</p>
+            <button
+              (click)="deleteProduct($event, product.product._id)"
+              class="mt-1 text-red-500 rounded-sm p-1 transition hover:bg-red-500 hover:text-white"
+            >
+              <span class="fa-solid fa-trash"></span> delete
+            </button>
+          </div>
+        </div>
+        <div class="flexed gap-5">
+          <button
+            (click)="
+              changeCount($event, product.product._id, product.count - 1)
+            "
+            class="text-sm border-2 rounded-md w-8 h-8 flexed border-Nova text-Nova hover:bg-Nova hover:text-white dark:hover:text-darkMode transition"
+          >
+            -
+          </button>
+          <p class="dark:text-Nova">{{ product.count }}</p>
+          <button
+            (click)="
+              changeCount($event, product.product._id, product.count + 1)
+            "
+            class="text-sm border-2 rounded-md w-8 h-8 flexed border-Nova text-Nova hover:bg-Nova hover:text-white dark:hover:text-darkMode transition"
+          >
+            +
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- clear btn and count -->
+    <div (click)="clearCart()" class="flexed">
+      <button class="nova-Btn">clear cart</button>
+    </div>
+  </div>
+</section>

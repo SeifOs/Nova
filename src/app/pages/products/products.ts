@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Product } from '../../core/interfaces/product/product';
 import { Getdata } from '../../core/services/getdata/getdata';
 import { Router } from '@angular/router';
+import { CartApi } from '../../core/services/cartApi/cart-api';
 
 @Component({
   selector: 'app-products',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 export class Products implements OnInit {
   private readonly getApiData = inject(Getdata);
   private readonly router = inject(Router);
+  private readonly cartApi = inject(CartApi);
 
   products!: Product[];
   pagesNum: number = 0;
@@ -32,9 +34,14 @@ export class Products implements OnInit {
   goToProduct(id: string) {
     this.router.navigate(['/product', id]);
   }
-  addToCart(e: Event) {
+  addToCart(e: Event, id: string) {
     e.stopPropagation();
-    console.log('add to cart');
+
+    this.cartApi.addToCart(id).subscribe({
+      next: (res) => {
+        console.log('added to the cart');
+      },
+    });
   }
 
   addToWishList(e: Event) {

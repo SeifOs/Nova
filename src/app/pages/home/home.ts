@@ -8,6 +8,7 @@ import { Getdata } from '../../core/services/getdata/getdata';
 import { Category } from '../../core/interfaces/category/category';
 import { Product } from '../../core/interfaces/product/product';
 import { ToastrService } from 'ngx-toastr';
+import { CartApi } from '../../core/services/cartApi/cart-api';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ export class Home implements OnInit {
   private readonly router = inject(Router);
   private readonly toastrService = inject(ToastrService);
   private readonly userData = inject(UserData);
+  private readonly cartApi = inject(CartApi);
 
   categories!: Category[];
   products!: Product[];
@@ -67,7 +69,6 @@ export class Home implements OnInit {
         if (res.data.length > 20) {
           this.products = res.data;
           this.products.length = 20;
-          console.log(this.products);
         } else {
           this.products = res.data;
         }
@@ -79,21 +80,19 @@ export class Home implements OnInit {
     this.router.navigate(['/product', Id]);
   }
 
-  addToCart(e: Event) {
+  addToCart(e: Event, id: string) {
     e.stopPropagation();
-    console.log('add to cart');
+
+    this.cartApi.addToCart(id).subscribe({
+      next: (res) => {
+        console.log('added to the cart');
+      },
+    });
   }
 
   // Token needed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   addToWishList(e: Event, id: string) {
     e.stopPropagation();
-    this.getDataApi.addToWishList(id).subscribe({
-      next: (res) => {
-        console.log(res);
-
-        this.showSuccess('Success', 'this product was added to your wishlist');
-      },
-    });
   }
 
   showSuccess(title: string, body: string) {
