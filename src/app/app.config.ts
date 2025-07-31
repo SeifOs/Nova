@@ -1,5 +1,6 @@
 import {
   ApplicationConfig,
+  importProvidersFrom,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from '@angular/core';
@@ -20,6 +21,8 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { provideToastr } from 'ngx-toastr';
 import { headersInterceptor } from './core/interceptors/headers/headers-interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { loadingInterceptor } from './core/interceptors/loading/loading-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,7 +33,10 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ scrollPositionRestoration: 'top' })
     ),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptors([headersInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([headersInterceptor, loadingInterceptor])
+    ),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
@@ -38,5 +44,6 @@ export const appConfig: ApplicationConfig = {
       },
     }),
     provideToastr(),
+    importProvidersFrom(NgxSpinnerModule),
   ],
 };
