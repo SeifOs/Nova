@@ -82,3 +82,39 @@ button:not([class*="cursor-"]) {
 ::-webkit-scrollbar-track {
   background: #f2f0ea;
 }
+
+/* ngs toaster theme */
+.custom-toast {
+  border-radius: 6px;
+}
+
+.custom-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.custom-message {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.toast-error {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border-left: 4px solid rgba(255, 0, 0, 0.8) !important;
+  color: rgba(255, 0, 0, 0.8) !important;
+}
+
+.toast-success {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border-left: 4px solid rgba(0, 128, 0, 0.8) !important;
+  color: rgba(0, 128, 0, 0.8) !important;
+}
+
+.toast-error .toast-progress {
+  background-color: rgb(207, 49, 49);
+  height: 4px;
+}
+
+.toast-success .toast-progress {
+  background-color: rgb(46, 204, 113);
+  height: 4px;
+}

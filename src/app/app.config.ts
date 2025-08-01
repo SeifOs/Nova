@@ -43,7 +43,13 @@ export const appConfig: ApplicationConfig = {
         preset: Aura,
       },
     }),
-    provideToastr(),
+    provideToastr({
+      toastClass: 'custom-toast ngx-toastr',
+      titleClass: 'custom-title',
+      messageClass: 'custom-message',
+      positionClass: 'toast-bottom-right',
+      iconClasses: { success: 'toast-success', error: 'toast-error' },
+    }),
     importProvidersFrom(NgxSpinnerModule),
   ],
 };

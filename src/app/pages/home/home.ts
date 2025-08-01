@@ -9,6 +9,7 @@ import { Category } from '../../core/interfaces/category/category';
 import { Product } from '../../core/interfaces/product/product';
 import { ToastrService } from 'ngx-toastr';
 import { CartApi } from '../../core/services/cartApi/cart-api';
+import { Notifications } from '../../core/services/notifications/notifications';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,7 @@ export class Home implements OnInit {
   private readonly toastrService = inject(ToastrService);
   private readonly userData = inject(UserData);
   private readonly cartApi = inject(CartApi);
+  private readonly notifications = inject(Notifications);
 
   categories!: Category[];
   products!: Product[];
@@ -85,7 +87,7 @@ export class Home implements OnInit {
 
     this.cartApi.addToCart(id).subscribe({
       next: (res) => {
-        console.log('added to the cart');
+        this.notifications.showSuccess('added to the cart', 'Success');
       },
     });
   }
