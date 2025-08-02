@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { CartItem } from '../../core/interfaces/cartItem/cart-item';
 import { CartApi } from './../../core/services/cartApi/cart-api';
 import { Component, inject, OnInit } from '@angular/core';
+import { Notifications } from '../../core/services/notifications/notifications';
 
 @Component({
   selector: 'app-cart',
@@ -12,6 +13,7 @@ import { Component, inject, OnInit } from '@angular/core';
 export class Cart implements OnInit {
   private readonly cartApi = inject(CartApi);
   private readonly router = inject(Router);
+  private readonly notifications = inject(Notifications);
 
   numOfCartItems: number = 0;
   totalCartPrice: number = 0;
@@ -43,6 +45,10 @@ export class Cart implements OnInit {
       next: (res) => {
         console.log(res);
         this.getUserCart();
+        this.notifications.showSuccess(res.message, res.status);
+      },
+      error: (err) => {
+        this.notifications.showError(err.error.message, err.error.statusMsg);
       },
     });
   }
@@ -52,7 +58,6 @@ export class Cart implements OnInit {
 
     this.cartApi.updateQuantity(id, count).subscribe({
       next: (res) => {
-        console.log(res);
         this.getUserCart();
       },
     });
@@ -61,8 +66,11 @@ export class Cart implements OnInit {
   clearCart() {
     this.cartApi.clearCart().subscribe({
       next: (res) => {
-        console.log('cart cleared');
         this.getUserCart();
+        this.notifications.showSuccess(res.message, res.status);
+      },
+      error: (err) => {
+        this.notifications.showError(err.error.message, err.error.statusMsg);
       },
     });
   }

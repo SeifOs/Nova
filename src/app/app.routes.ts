@@ -12,6 +12,7 @@ import { Products } from './pages/products/products';
 import { ProductPage } from './pages/product-page/product-page';
 import { authGuard } from './core/guards/auth/auth-guard';
 import { signOutGuard } from './core/guards/signOut/sign-out-guard';
+import { WishList } from './pages/wish-list/wish-list';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -30,6 +31,7 @@ export const routes: Routes = [
         component: ProductPage,
         title: 'Nova - product page',
       },
+      { path: 'wishlist', component: WishList, title: 'Nova - wishlist' },
     ],
   },
   {

@@ -7,9 +7,9 @@ import { CarouselModule } from 'primeng/carousel';
 import { Getdata } from '../../core/services/getdata/getdata';
 import { Category } from '../../core/interfaces/category/category';
 import { Product } from '../../core/interfaces/product/product';
-import { ToastrService } from 'ngx-toastr';
 import { CartApi } from '../../core/services/cartApi/cart-api';
 import { Notifications } from '../../core/services/notifications/notifications';
+import { WishListApi } from '../../core/services/wishListApi/wish-list-api';
 
 @Component({
   selector: 'app-home',
@@ -24,13 +24,15 @@ export class Home implements OnInit {
   private readonly flowbite = inject(Flowbite);
   private readonly getDataApi = inject(Getdata);
   private readonly router = inject(Router);
-  private readonly toastrService = inject(ToastrService);
   private readonly userData = inject(UserData);
   private readonly cartApi = inject(CartApi);
   private readonly notifications = inject(Notifications);
+  private readonly wishListApi = inject(WishListApi);
 
   categories!: Category[];
   products!: Product[];
+  wishList!: Product[];
+  wishListIds: string[] = [];
   responsiveOptions: any = [
     {
       breakpoint: '1199px',
@@ -55,6 +57,19 @@ export class Home implements OnInit {
 
     this.flowbite.loadFlowbite((flowbite) => {
       initFlowbite();
+    });
+
+    this.wishListApi.getWishList().subscribe({
+      next: (res) => {
+        this.wishList = res.data;
+        for (let i = 0; i < this.wishList.length; i++) {
+          this.wishListIds.push(this.wishList[i]._id);
+        }
+        console.log(this.wishListIds);
+      },
+      error: (err) => {
+        this.notifications.showError(err.error.message, err.error.statusMsg);
+      },
     });
 
     this.getDataApi.getAllCat().subscribe({
@@ -87,17 +102,37 @@ export class Home implements OnInit {
 
     this.cartApi.addToCart(id).subscribe({
       next: (res) => {
-        this.notifications.showSuccess('added to the cart', 'Success');
+        this.notifications.showSuccess(res.message, res.status);
+      },
+      error: (err) => {
+        this.notifications.showError(err.error.message, err.error.statusMsg);
       },
     });
   }
 
-  // Token needed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  addToWishList(e: Event, id: string) {
+  toggleWishList(e: Event, id: string) {
     e.stopPropagation();
-  }
 
-  showSuccess(title: string, body: string) {
-    this.toastrService.success(body, title);
+    if (this.wishListIds.includes(id)) {
+      this.wishListApi.removeFromWishList(id).subscribe({
+        next: (res) => {
+          this.notifications.showSuccess(res.message, res.status);
+          this.wishListIds.splice(this.wishListIds.indexOf(id), 1);
+        },
+        error: (err) => {
+          this.notifications.showError(err.error.message, err.error.statusMsg);
+        },
+      });
+    } else {
+      this.wishListApi.addToWishList(id).subscribe({
+        next: (res) => {
+          this.notifications.showSuccess(res.message, res.status);
+          this.wishListIds.push(id);
+        },
+        error: (err) => {
+          this.notifications.showError(err.error.message, err.error.statusMsg);
+        },
+      });
+    }
   }
 }

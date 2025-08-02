@@ -220,10 +220,14 @@
         <h3 class="font-semibold">{{ product.price }} L.E</h3>
         <div class="flex gap-1">
           <button
-            (click)="addToWishList($event, product._id)"
-            class="w-8 h-8 flexed border rounded-md hover:bg-red-600 hover:border-red-600 hover:text-white"
+            (click)="toggleWishList($event, product._id)"
+            class="w-8 h-8 flexed border rounded-md hover:bg-red-600 hover:border-red-600 text-red-600 hover:text-white"
           >
-            <i class="fa-regular fa-heart" s></i>
+            @if (wishListIds.includes(product._id)) {
+            <span><i class="fa-solid fa-heart"></i></span>
+            }@else {
+            <span><i class="fa-regular fa-heart" s></i></span>
+            }
           </button>
           <button
             (click)="addToCart($event, product._id)"

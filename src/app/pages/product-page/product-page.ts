@@ -6,6 +6,7 @@ import { Getdata } from '../../core/services/getdata/getdata';
 import { ViewChild } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { Carousel } from 'primeng/carousel';
+import { Notifications } from '../../core/services/notifications/notifications';
 
 @Component({
   selector: 'app-product-page',
@@ -17,6 +18,7 @@ export class ProductPage implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly getApiData = inject(Getdata);
   private readonly cartApi = inject(CartApi);
+  private readonly notifications = inject(Notifications);
 
   @ViewChild('carousel') carousel!: Carousel;
   loading = true;
@@ -49,14 +51,17 @@ export class ProductPage implements OnInit {
       this.carousel.stopAutoplay();
     }
   }
+
   resumeCarousel() {
     if (this.carousel) {
       this.carousel.startAutoplay();
     }
   }
+  // TODO: placeholder image
   onImageError(event: any) {
     event.target.src = 'assets/placeholder-image.png'; // Replace with your placeholder
   }
+
   onProductDataLoaded(productData: any) {
     this.product = productData;
     this.loading = false;
@@ -65,7 +70,10 @@ export class ProductPage implements OnInit {
   addToCart() {
     this.cartApi.addToCart(this.product._id).subscribe({
       next: (res) => {
-        console.log('added to the cart');
+        this.notifications.showSuccess(res.message, res.status);
+      },
+      error: (err) => {
+        this.notifications.showError(err.error.message, err.error.statusMsg);
       },
     });
   }
