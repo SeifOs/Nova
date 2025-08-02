@@ -60,9 +60,13 @@
           <i class="fa-solid fa-cart-shopping"></i> Add to cart
         </button>
         <button
+          (click)="toggleWishList()"
           class="flexed gap-1 border border-red-600 text-red-600 rounded-md px-2 hover:bg-red-600 hover:border-red-600 hover:text-white"
         >
-          <i class="fa-regular fa-heart"></i> Add to wish list
+          @if (inWish) {
+          <span><i class="fa-solid fa-heart"></i></span> Remove from wish list }
+          @else { <span><i class="fa-regular fa-heart" s></i></span> Add to wish
+          list }
         </button>
       </div>
     </div>

@@ -98,15 +98,15 @@ button:not([class*="cursor-"]) {
 }
 
 .toast-error {
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  border-left: 4px solid rgba(255, 0, 0, 0.8) !important;
-  color: rgba(255, 0, 0, 0.8) !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-left: 4px solid rgba(255, 0, 0, 0.9) !important;
+  color: rgba(255, 0, 0, 0.9) !important;
 }
 
 .toast-success {
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  border-left: 4px solid rgba(0, 128, 0, 0.8) !important;
-  color: rgba(0, 128, 0, 0.8) !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-left: 4px solid rgba(0, 128, 0, 0.9) !important;
+  color: rgba(0, 128, 0, 0.9) !important;
 }
 
 .toast-error .toast-progress {

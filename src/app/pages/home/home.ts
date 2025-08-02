@@ -94,7 +94,11 @@ export class Home implements OnInit {
   }
 
   goToProduct(Id: string) {
-    this.router.navigate(['/product', Id]);
+    if (this.wishListIds.includes(Id)) {
+      this.router.navigate(['/product', Id, 1]);
+    } else {
+      this.router.navigate(['/product', Id, 0]);
+    }
   }
 
   addToCart(e: Event, id: string) {

@@ -1,3 +1,4 @@
+import { WishListApi } from './../../core/services/wishListApi/wish-list-api';
 import { CartApi } from './../../core/services/cartApi/cart-api';
 import { Product } from './../../core/interfaces/product/product';
 import { Component, inject, OnInit } from '@angular/core';
@@ -19,15 +20,23 @@ export class ProductPage implements OnInit {
   private readonly getApiData = inject(Getdata);
   private readonly cartApi = inject(CartApi);
   private readonly notifications = inject(Notifications);
+  private readonly wishListApi = inject(WishListApi);
 
   @ViewChild('carousel') carousel!: Carousel;
   loading = true;
 
   product!: Product;
+  inWish: boolean = false;
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe({
       next: (res) => {
+        if (res.get('inWish') == '1') {
+          this.inWish = true;
+        } else {
+          this.inWish = false;
+        }
+
         this.getApiData.getSpecificProduct(res.get('id')!).subscribe({
           next: (res2) => {
             this.onProductDataLoaded(res2.data);
@@ -76,5 +85,29 @@ export class ProductPage implements OnInit {
         this.notifications.showError(err.error.message, err.error.statusMsg);
       },
     });
+  }
+
+  toggleWishList() {
+    if (this.inWish) {
+      this.wishListApi.removeFromWishList(this.product._id).subscribe({
+        next: (res) => {
+          this.notifications.showSuccess(res.message, res.status);
+          this.inWish = false;
+        },
+        error: (err) => {
+          this.notifications.showError(err.error.message, err.error.statusMsg);
+        },
+      });
+    } else {
+      this.wishListApi.addToWishList(this.product._id).subscribe({
+        next: (res) => {
+          this.notifications.showSuccess(res.message, res.status);
+          this.inWish = true;
+        },
+        error: (err) => {
+          this.notifications.showError(err.error.message, err.error.statusMsg);
+        },
+      });
+    }
   }
 }

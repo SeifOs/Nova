@@ -27,7 +27,7 @@ export const routes: Routes = [
       { path: 'categories', component: Categories, title: 'Nove - categories' },
       { path: 'products', component: Products, title: 'Nove - products' },
       {
-        path: 'product/:id',
+        path: 'product/:id/:inWish',
         component: ProductPage,
         title: 'Nova - product page',
       },
