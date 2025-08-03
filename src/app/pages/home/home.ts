@@ -1,3 +1,4 @@
+import { IsBrowser } from './../../core/services/isBrowser/is-browser';
 import { UserData } from './../../core/services/userData/user-data';
 import { Component, inject, OnInit } from '@angular/core';
 import { initFlowbite } from 'flowbite';
@@ -28,6 +29,7 @@ export class Home implements OnInit {
   private readonly cartApi = inject(CartApi);
   private readonly notifications = inject(Notifications);
   private readonly wishListApi = inject(WishListApi);
+  private readonly isBrowser = inject(IsBrowser);
 
   categories!: Category[];
   products!: Product[];
@@ -53,6 +55,11 @@ export class Home implements OnInit {
   userName: string = 'User';
 
   ngOnInit(): void {
+    if (this.isBrowser.isBrowser()) {
+      if (localStorage.getItem('token') != null) {
+        this.userData.saveToken(localStorage.getItem('token')!);
+      }
+    }
     this.userName = this.userData.getName();
 
     this.flowbite.loadFlowbite((flowbite) => {

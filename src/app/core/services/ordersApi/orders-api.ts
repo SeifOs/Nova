@@ -17,4 +17,10 @@ export class OrdersApi {
       }
     );
   }
+
+  getAllOrders(userId: string): Observable<any> {
+    return this.httpClient.get(
+      `${environment.baseUrl}/api/v1/orders/user/${userId}`
+    );
+  }
 }

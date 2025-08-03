@@ -8,6 +8,7 @@ import { IUser } from '../../interfaces/user/iuser';
 export class UserData {
   token: string | null = null;
   userName: string = '';
+  userId: string = '';
   data!: IUser;
 
   saveToken(t: string): void {
@@ -15,6 +16,7 @@ export class UserData {
     localStorage.setItem('token', this.token);
     this.data = jwtDecode(this.token);
     this.userName = this.data.name;
+    this.userId = this.data.id;
   }
 
   deleteToken(): void {
@@ -29,5 +31,9 @@ export class UserData {
 
   getName(): string {
     return this.userName;
+  }
+
+  getId(): string {
+    return this.userId;
   }
 }
