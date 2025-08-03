@@ -45,7 +45,6 @@ button:not([class*="cursor-"]) {
     color: black;
   }
   :root.dark .myContainer {
-    background-color: #010101;
     color: white;
   }
 }

@@ -1,0 +1,131 @@
+<section class="flexed w-full myContainer p-5 bg-lightGray dark:bg-darkMode">
+  <div class="flexed flex-col gap-3 bg-white dark:bg-darkMode2 rounded-md p-5">
+    <h2 class="text-3xl font-bold dark:text-Nova">Check Out</h2>
+    <form
+      [formGroup]="checkOutForm"
+      (ngSubmit)="submitForm()"
+      class="flexed flex-col gap-2 px-2 md:px-10"
+    >
+      <div class="w-full">
+        <label for="details">details</label>
+        <input
+          type="text"
+          formControlName="details"
+          class="w-full px-3 py-2 rounded-md border border-Nova ring-Nova dark:bg-darkMode2 mt-1"
+        />
+        @if (checkOutForm.get('details')?.errors &&
+        checkOutForm.get('details')?.touched){
+        <div
+          class="flex p-3 mt-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-transparent dark:border dark:border-red-400 dark:text-red-400"
+          role="alert"
+        >
+          <svg
+            class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+            />
+          </svg>
+          <span class="sr-only">Danger</span>
+          <div>
+            <ul class="mt-1.5 list-disc list-inside">
+              @if (checkOutForm.get('details')?.getError('required')) {
+              <li>details is required</li>
+              } @if (checkOutForm.get('details')?.getError('minlength')) {
+              <li>details must be at least 3 characters</li>
+              }
+            </ul>
+          </div>
+        </div>
+        }
+      </div>
+
+      <div class="w-full">
+        <label for="phone">phone</label>
+        <input
+          type="tel"
+          formControlName="phone"
+          class="w-full px-3 py-2 rounded-md border border-Nova ring-Nova dark:bg-darkMode2 mt-1"
+        />
+        @if (checkOutForm.get('phone')?.errors &&
+        checkOutForm.get('phone')?.touched){
+        <div
+          class="flex p-3 mt-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-transparent dark:border dark:border-red-400 dark:text-red-400"
+          role="alert"
+        >
+          <svg
+            class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+            />
+          </svg>
+          <span class="sr-only">Danger</span>
+          <div>
+            <span class="font-medium">Oops, there’s a problem, boss:</span>
+            <ul class="mt-1.5 list-disc list-inside">
+              @if (checkOutForm.get('phone')?.getError('required')) {
+              <li>required</li>
+              } @if (checkOutForm.get('phone')?.getError('pattern')) {
+              <li>enter a valid Egyptian phone number</li>
+              }
+            </ul>
+          </div>
+        </div>
+        }
+      </div>
+
+      <div class="w-full">
+        <label for="city">city</label>
+        <input
+          type="text"
+          formControlName="city"
+          class="w-full px-3 py-2 rounded-md border border-Nova ring-Nova dark:bg-darkMode2 mt-1"
+        />
+        @if (checkOutForm.get('city')?.errors &&
+        checkOutForm.get('city')?.touched){
+        <div
+          class="flex p-3 mt-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-transparent dark:border dark:border-red-400 dark:text-red-400"
+          role="alert"
+        >
+          <svg
+            class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+            />
+          </svg>
+          <span class="sr-only">Danger</span>
+          <div>
+            <ul class="mt-1.5 list-disc list-inside">
+              @if (checkOutForm.get('city')?.getError('required')) {
+              <li>details is required</li>
+              }
+            </ul>
+          </div>
+        </div>
+        }
+      </div>
+      <button
+        [disabled]="checkOutForm.invalid || isLoading"
+        class="disabled:bg-Nova/50 disabled:cursor-not-allowed cursor-pointer bg-Nova rounded-md px-5 py-2 mt-2 hover:bg-amber-300 dark:text-black"
+      >
+        check Out @if (isLoading) {
+        <span><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+        }
+      </button>
+    </form>
+  </div>
+</section>

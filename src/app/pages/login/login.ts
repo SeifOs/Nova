@@ -4,7 +4,6 @@ import {
   FormControl,
   ReactiveFormsModule,
   Validators,
-  AbstractControl,
 } from '@angular/forms';
 import { Auth } from '../../core/services/auth/auth';
 import { Router, RouterLink } from '@angular/router';

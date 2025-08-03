@@ -1,22 +1,28 @@
-<section class="myContainer bg-lightGray dark:bg-darkMode2 flexed">
+<section class="myContainer bg-lightGray dark:bg-darkMode flexed">
   <div class="bg-white dark:bg-darkMode2 p-5 rounded-lg w-[80%] my-10">
     <!-- head -->
     <div class="flex justify-between items-center">
       <div class="flex flex-col gap-2">
         <h2 class="text-3xl lg:text-5xl">Cart</h2>
+        @if (!isEmpty) {
         <p class="ps-1">
           total:
           <span class="dark:text-Nova font-bold"> {{ totalCartPrice }} </span>
           L.E
         </p>
+        }
       </div>
+      @if (!isEmpty) {
       <div class="flex flex-col gap-2">
-        <button class="nova-Btn">Check out</button>
+        <button [routerLink]="['/checkOut', cartId]" class="nova-Btn">
+          Check out
+        </button>
         <p>
           items num:
           <span class="dark:text-Nova font-bold"> {{ numOfCartItems }} </span>
         </p>
       </div>
+      }
     </div>
 
     <!-- products -->
@@ -64,12 +70,19 @@
           </button>
         </div>
       </div>
+      }@empty {
+      <p class="text-center py-10">
+        You didn't plan to buy anything yet, add products to cart to see them
+        here
+      </p>
       }
     </div>
 
     <!-- clear btn and count -->
+    @if (!isEmpty) {
     <div (click)="clearCart()" class="flexed">
       <button class="nova-Btn">clear cart</button>
     </div>
+    }
   </div>
 </section>

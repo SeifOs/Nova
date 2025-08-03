@@ -1,1 +1,32 @@
-<p>brands works!</p>
+<section class="myContainer bg-lightGray dark:bg-darkMode2">
+  <h2 class="text-4xl font-bold text-center dark:bg-darkMode2 pt-10">Brands</h2>
+  <div
+    class="w-full px-20 flex justify-evenly flex-wrap gap-4 py-10 dark:bg-darkMode2"
+  >
+    @for (brand of brands; track brand._id) {
+    <div
+      class="hover:scale-105 transition cursor-pointer bg-white dark:bg-darkMode shadow-md w-[200px] p-3 flex flex-col justify-between rounded-md"
+    >
+      <img [src]="brand.image" [alt]="brand.name" class="h-52 rounded-md" />
+      <h3 class="text-start w-full font-semibold text-lg">
+        {{ brand.name }}
+      </h3>
+    </div>
+    }
+  </div>
+  <div class="flexed gap-5 pb-10 dark:bg-darkMode2">
+    <button
+      (click)="goPrevPage()"
+      class="text-sm border-2 rounded-md py-1 px-2 border-Nova text-Nova hover:bg-Nova hover:text-white dark:hover:text-darkMode transition"
+    >
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    <p class="dark:text-Nova">{{ currentPage }}</p>
+    <button
+      (click)="goNextPage()"
+      class="text-sm border-2 rounded-md py-1 px-2 border-Nova text-Nova hover:bg-Nova hover:text-white dark:hover:text-darkMode transition"
+    >
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </div>
+</section>

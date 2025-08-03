@@ -13,6 +13,8 @@ import { ProductPage } from './pages/product-page/product-page';
 import { authGuard } from './core/guards/auth/auth-guard';
 import { signOutGuard } from './core/guards/signOut/sign-out-guard';
 import { WishList } from './pages/wish-list/wish-list';
+import { CheckOut } from './pages/check-out/check-out';
+import { AllOrders } from './pages/all-orders/all-orders';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -32,6 +34,12 @@ export const routes: Routes = [
         title: 'Nova - product page',
       },
       { path: 'wishlist', component: WishList, title: 'Nova - wishlist' },
+      {
+        path: 'checkOut/:cartId',
+        component: CheckOut,
+        title: 'Nova - Check out',
+      },
+      { path: 'allorders', component: AllOrders, title: 'Nova - Orders' },
     ],
   },
   {

@@ -1,1 +1,19 @@
-<p>categories works!</p>
+<section class="myContainer bg-lightGray dark:bg-darkMode2">
+  <h2 class="text-4xl font-bold text-center dark:bg-darkMode2 pt-10">
+    Categories
+  </h2>
+  <div
+    class="w-full px-20 flex justify-evenly flex-wrap gap-4 py-10 dark:bg-darkMode2"
+  >
+    @for (cat of cats; track cat._id) {
+    <div
+      class="hover:scale-105 transition cursor-pointer bg-white dark:bg-darkMode shadow-md w-[200px] p-3 flex flex-col justify-between rounded-md"
+    >
+      <img [src]="cat.image" [alt]="cat.name" class="h-52 rounded-md" />
+      <h3 class="text-start w-full font-semibold text-lg">
+        {{ cat.name }}
+      </h3>
+    </div>
+    }
+  </div>
+</section>
