@@ -1,1 +1,44 @@
-<p>wish-list works!</p>
+<section class="myContainer bg-lightGray dark:bg-darkMode flexed">
+  <div class="w-[80%] bg-white dark:bg-darkMode2 p-5 rounded-lg my-10">
+    <!-- head -->
+    <h2 class="text-2xl md:text-4xl mb-5 text-center">my wish list</h2>
+
+    <!-- body -->
+    <div class="w-full flex flex-col gap-2 p-2">
+      @for (product of products; track product._id) {
+      <div
+        (click)="goToProduct(product._id)"
+        class="cursor-pointer w-full p-3 rounded-md hover:bg-lightGray dark:hover:bg-darkMode flex flex-col md:flex-row gap-2 justify-between items-center"
+      >
+        <div class="flex gap-5 text-sm md:text-base">
+          <img
+            [src]="product.imageCover"
+            [alt]="product.title"
+            class="w-10 md:w-16 rounded-md"
+          />
+          <div>
+            <h3 class="font-semibold">{{ product.title }}</h3>
+            <p>price: {{ product.price }}</p>
+            <button
+              (click)="deleteProduct($event, product._id)"
+              class="mt-1 text-red-500 rounded-sm p-1 transition hover:bg-red-500 hover:text-white"
+            >
+              <span class="fa-solid fa-trash"></span> Remove from wishlist
+            </button>
+          </div>
+        </div>
+        <button
+          (click)="addToCart($event, product._id)"
+          class="nova-Btn text-sm"
+        >
+          <i class="fa-solid fa-cart-shopping"></i> add to cart
+        </button>
+      </div>
+      }@empty {
+      <p class="h-20 flexed">
+        you don't have any products in wishlist yet, add some to see them here
+      </p>
+      }
+    </div>
+  </div>
+</section>

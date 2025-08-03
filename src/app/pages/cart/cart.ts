@@ -29,7 +29,6 @@ export class Cart implements OnInit {
         this.numOfCartItems = res.numOfCartItems;
         this.products = res.data.products;
         this.totalCartPrice = res.data.totalCartPrice;
-        console.log(res);
       },
     });
   }
@@ -43,7 +42,6 @@ export class Cart implements OnInit {
 
     this.cartApi.updateQuantity(id, 0).subscribe({
       next: (res) => {
-        console.log(res);
         this.getUserCart();
         this.notifications.showSuccess(res.message, res.status);
       },
